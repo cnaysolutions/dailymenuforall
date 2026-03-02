@@ -221,14 +221,6 @@ export default async function Home() {
           <span>{formattedDateTr}</span>
           <span className="date-en">{formattedDate}</span>
         </div>
-
-        {/* Music Player */}
-        <div className="music-player">
-          <span className="music-icon">♪</span>
-          <audio controls loop preload="none" className="audio-el">
-            <source src={BG_MUSIC_URL} type="audio/mpeg" />
-          </audio>
-        </div>
       </header>
 
       {/* Halal badge */}
@@ -269,6 +261,14 @@ export default async function Home() {
           dish={menu?.side}
           media={media?.side}
         />
+      </div>
+
+      {/* Music Player */}
+      <div className="music-player">
+        <span className="music-icon">♪</span>
+        <audio controls loop preload="none" className="audio-el">
+          <source src={BG_MUSIC_URL} type="audio/mpeg" />
+        </audio>
       </div>
 
       {/* Footer */}

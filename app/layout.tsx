@@ -1,28 +1,31 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Günün Menüsü | Daily Menu",
   description:
-    "AI-powered daily menu with halal dishes — soup, main course, salad, and side. No pork, no alcohol. Yapay zeka ile oluşturulan günlük menü.",
+    "AI-powered daily halal menu — soup, main course, salad, and side. No pork, no alcohol. Yapay zeka ile oluşturulan günlük helal menü.",
   keywords: ["daily menu", "halal food", "günün menüsü", "helal yemek", "AI menu"],
   openGraph: {
     title: "Günün Menüsü | Daily Menu",
     description: "Fresh halal menu every day — generated with AI",
     type: "website",
-    locale: "tr_TR",
-    alternateLocale: "en_US",
   },
   robots: "index, follow",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headersList = await headers();
+  const host = headersList.get("host") || "";
+  const lang = host.toLowerCase().includes("gunlukmenu") ? "tr" : "en";
+
   return (
-    <html lang="tr">
+    <html lang={lang}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link

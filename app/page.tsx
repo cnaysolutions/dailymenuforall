@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import { createClient } from "@supabase/supabase-js";
+import { headers } from "next/headers";
 import Image from "next/image";
 
 const supabase = createClient(
@@ -10,6 +11,48 @@ const supabase = createClient(
 
 const BG_MUSIC_URL =
   "https://hwuhwqmixioehvshmila.supabase.co/storage/v1/object/public/menu-music/bg-tr-1.mp3";
+
+// ─── Language config per domain ───
+function getLangFromHost(host: string): "tr" | "en" {
+  const h = host.toLowerCase();
+  if (h.includes("gunlukmenu")) return "tr";
+  return "en";
+}
+
+const labels = {
+  en: {
+    badge_today: "Today's Menu",
+    badge_latest: "Latest Menu",
+    title: "Daily Menu",
+    halal: "✓ Halal — No pork, no alcohol",
+    soup: "Soup",
+    main: "Main Course",
+    salad: "Salad",
+    side: "Side Dish",
+    ingredients: "Ingredients",
+    serving: "Serving",
+    empty_title: "Daily Menu",
+    empty_text: "Today's menu is being prepared. Check back soon!",
+    footer: "Menu generated with AI — ingredients may vary",
+    error: "Something went wrong. Please try again later.",
+  },
+  tr: {
+    badge_today: "Günün Menüsü",
+    badge_latest: "Son Menü",
+    title: "Günün Menüsü",
+    halal: "✓ Helal — Domuz eti yok, alkol yok",
+    soup: "Çorba",
+    main: "Ana Yemek",
+    salad: "Salata",
+    side: "Yan Yemek",
+    ingredients: "Malzemeler",
+    serving: "Porsiyon",
+    empty_title: "Günün Menüsü",
+    empty_text: "Günün menüsü hazırlanıyor. Lütfen daha sonra tekrar kontrol edin!",
+    footer: "Menü yapay zeka ile oluşturulmuştur — malzemeler değişebilir",
+    error: "Bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
+  },
+};
 
 // ─── Types ───
 interface Ingredient {
@@ -51,44 +94,39 @@ interface MediaData {
 // ─── Dish Card Component ───
 function DishCard({
   label,
-  labelTr,
   emoji,
   dish,
   media,
+  lang,
 }: {
   label: string;
-  labelTr: string;
   emoji: string;
   dish?: Dish;
   media?: MediaDish;
+  lang: "en" | "tr";
 }) {
   const images = media?.images || [];
+  const title = lang === "tr" ? (dish?.title_tr ?? dish?.title_en ?? "—") : (dish?.title_en ?? "—");
+  const desc = lang === "tr" ? (dish?.description_tr ?? dish?.description_en) : (dish?.description_en);
+  const l = labels[lang];
 
   return (
     <section className="dish-card">
       <div className="dish-header">
         <span className="dish-emoji">{emoji}</span>
         <div>
-          <span className="dish-label">
-            {label} / {labelTr}
-          </span>
-          <h2 className="dish-title">{dish?.title_en ?? "—"}</h2>
-          <h3 className="dish-title-tr">{dish?.title_tr ?? ""}</h3>
+          <span className="dish-label">{label}</span>
+          <h2 className="dish-title">{title}</h2>
         </div>
       </div>
 
-      {dish?.description_en && (
-        <p className="dish-desc">{dish.description_en}</p>
-      )}
-      {dish?.description_tr && (
-        <p className="dish-desc-tr">{dish.description_tr}</p>
-      )}
+      {desc && <p className="dish-desc">{desc}</p>}
 
       {images.length > 0 && (
         <div className="dish-image-wrap">
           <Image
             src={images[0]}
-            alt={dish?.title_en ?? label}
+            alt={title}
             width={800}
             height={600}
             className="dish-image"
@@ -109,7 +147,7 @@ function DishCard({
 
       {dish?.ingredients && dish.ingredients.length > 0 && (
         <details className="ingredients-details">
-          <summary>Ingredients / Malzemeler</summary>
+          <summary>{l.ingredients}</summary>
           <ul className="ingredients-list">
             {dish.ingredients.map((ing, idx) => (
               <li key={idx}>
@@ -117,8 +155,7 @@ function DishCard({
                   {ing.quantity} {ing.unit}
                 </span>{" "}
                 <span className="ing-name">
-                  {ing.name_en}
-                  <span className="ing-name-tr"> / {ing.name_tr}</span>
+                  {lang === "tr" ? ing.name_tr : ing.name_en}
                 </span>
               </li>
             ))}
@@ -128,7 +165,7 @@ function DishCard({
 
       {dish?.serving_size_g && (
         <div className="serving-info">
-          Serving: {dish.serving_size_g}g / Porsiyon: {dish.serving_size_g}g
+          {l.serving}: {dish.serving_size_g}g
         </div>
       )}
     </section>
@@ -137,9 +174,13 @@ function DishCard({
 
 // ─── Main Page ───
 export default async function Home() {
+  const headersList = await headers();
+  const host = headersList.get("host") || "";
+  const lang = getLangFromHost(host);
+  const l = labels[lang];
+
   const today = new Date().toISOString().slice(0, 10);
 
-  // Try to get today's published menu
   const { data: todayMenu, error: errToday } = await supabase
     .from("daily_menus")
     .select("menu_date, status, menu_json, media_json")
@@ -151,13 +192,12 @@ export default async function Home() {
     return (
       <main className="page-container">
         <div className="error-state">
-          <p>Something went wrong. Please try again later.</p>
+          <p>{l.error}</p>
         </div>
       </main>
     );
   }
 
-  // Fallback to latest published
   const { data: latestMenu } = todayMenu
     ? { data: null }
     : await supabase
@@ -175,11 +215,8 @@ export default async function Home() {
       <main className="page-container">
         <div className="empty-state">
           <div className="empty-icon">🍽️</div>
-          <h1>Daily Menu</h1>
-          <p>Today&apos;s menu is being prepared. Check back soon!</p>
-          <p className="empty-sub">
-            Günün menüsü hazırlanıyor. Lütfen daha sonra tekrar kontrol edin!
-          </p>
+          <h1>{l.empty_title}</h1>
+          <p>{l.empty_text}</p>
         </div>
       </main>
     );
@@ -191,15 +228,9 @@ export default async function Home() {
   const menuDate = (data as Record<string, unknown>).menu_date as string;
   const isToday = menuDate === today;
 
-  // Format date nicely
   const dateObj = new Date(menuDate + "T00:00:00");
-  const formattedDate = dateObj.toLocaleDateString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-  const formattedDateTr = dateObj.toLocaleDateString("tr-TR", {
+  const locale = lang === "tr" ? "tr-TR" : "en-US";
+  const formattedDate = dateObj.toLocaleDateString(locale, {
     weekday: "long",
     year: "numeric",
     month: "long",
@@ -208,62 +239,25 @@ export default async function Home() {
 
   return (
     <main className="page-container">
-      {/* Header */}
       <header className="page-header">
         <div className="header-badge">
-          {isToday ? "Today's Menu" : "Latest Menu"}
+          {isToday ? l.badge_today : l.badge_latest}
         </div>
-        <h1 className="header-title">
-          Günün Menüsü
-          <span className="header-sub">Daily Menu</span>
-        </h1>
+        <h1 className="header-title">{l.title}</h1>
         <div className="header-date">
-          <span>{formattedDateTr}</span>
-          <span className="date-en">{formattedDate}</span>
+          <span>{formattedDate}</span>
         </div>
       </header>
 
-      {/* Halal badge */}
-      <div className="halal-badge">
-        <span>✓</span> Halal — No pork, no alcohol
-        <span className="halal-tr">
-          | Helal — Domuz eti yok, alkol yok
-        </span>
-      </div>
+      <div className="halal-badge">{l.halal}</div>
 
-      {/* Dishes */}
       <div className="dishes-grid">
-        <DishCard
-          label="Soup"
-          labelTr="Çorba"
-          emoji="🍜"
-          dish={menu?.soup}
-          media={media?.soup}
-        />
-        <DishCard
-          label="Main"
-          labelTr="Ana Yemek"
-          emoji="🥘"
-          dish={menu?.main}
-          media={media?.main}
-        />
-        <DishCard
-          label="Salad"
-          labelTr="Salata"
-          emoji="🥗"
-          dish={menu?.salad}
-          media={media?.salad}
-        />
-        <DishCard
-          label="Side"
-          labelTr="Yan Yemek"
-          emoji="🍚"
-          dish={menu?.side}
-          media={media?.side}
-        />
+        <DishCard label={l.soup} emoji="🍜" dish={menu?.soup} media={media?.soup} lang={lang} />
+        <DishCard label={l.main} emoji="🥘" dish={menu?.main} media={media?.main} lang={lang} />
+        <DishCard label={l.salad} emoji="🥗" dish={menu?.salad} media={media?.salad} lang={lang} />
+        <DishCard label={l.side} emoji="🍚" dish={menu?.side} media={media?.side} lang={lang} />
       </div>
 
-      {/* Music Player */}
       <div className="music-player">
         <span className="music-icon">♪</span>
         <audio controls loop preload="none" className="audio-el">
@@ -271,13 +265,8 @@ export default async function Home() {
         </audio>
       </div>
 
-      {/* Footer */}
       <footer className="page-footer">
-        <p>
-          Menu generated with AI — ingredients may vary
-          <br />
-          Menü yapay zeka ile oluşturulmuştur — malzemeler değişebilir
-        </p>
+        <p>{l.footer}</p>
       </footer>
     </main>
   );

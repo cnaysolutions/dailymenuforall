@@ -437,6 +437,64 @@ audio::-webkit-media-controls-panel {
   font-style: italic;
 }
 
+/* ─── Recipe Steps ─── */
+.recipe-details {
+  margin-top: 12px;
+  border-top: 1px solid var(--border-light);
+  padding-top: 12px;
+}
+
+.recipe-details summary {
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--green);
+  letter-spacing: 0.02em;
+  padding: 4px 0;
+  user-select: none;
+}
+
+.recipe-details summary:hover {
+  opacity: 0.8;
+}
+
+.recipe-steps {
+  margin-top: 12px;
+  padding-left: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.recipe-steps li {
+  counter-increment: step;
+  position: relative;
+  padding: 10px 12px 10px 44px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+}
+
+.recipe-steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 12px;
+  top: 10px;
+  width: 22px;
+  height: 22px;
+  background: var(--green);
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .serving-info {
   margin-top: 10px;
   font-size: 12px;

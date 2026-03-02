@@ -32,6 +32,7 @@ const labels = {
     side: "Side Dish",
     ingredients: "Ingredients",
     serving: "Serving",
+    recipe: "How to Make",
     empty_title: "Daily Menu",
     empty_text: "Today's menu is being prepared. Check back soon!",
     footer: "Menu generated with AI — ingredients may vary",
@@ -50,6 +51,7 @@ const labels = {
     side: "Yan Yemek",
     ingredients: "Malzemeler",
     serving: "Porsiyon",
+    recipe: "Nasıl Yapılır?",
     empty_title: "Günün Menüsü",
     empty_text: "Günün menüsü hazırlanıyor. Lütfen daha sonra tekrar kontrol edin!",
     footer: "Menü yapay zeka ile oluşturulmuştur — malzemeler değişebilir",
@@ -73,6 +75,8 @@ interface Dish {
   description_en?: string;
   description_tr?: string;
   ingredients?: Ingredient[];
+  steps_en?: string[];
+  steps_tr?: string[];
   serving_size_g?: number;
   diet_tags?: string[];
 }
@@ -175,6 +179,22 @@ function DishCard({
           </ul>
         </details>
       )}
+
+      {/* Recipe Steps */}
+      {(() => {
+        const steps = lang === "tr" ? (dish?.steps_tr || dish?.steps_en) : (dish?.steps_en);
+        if (!steps || steps.length === 0) return null;
+        return (
+          <details className="recipe-details">
+            <summary>{l.recipe}</summary>
+            <ol className="recipe-steps">
+              {steps.map((step, idx) => (
+                <li key={idx}>{step}</li>
+              ))}
+            </ol>
+          </details>
+        );
+      })()}
 
       {dish?.serving_size_g && (
         <div className="serving-info">

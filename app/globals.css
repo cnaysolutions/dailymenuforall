@@ -515,6 +515,30 @@ audio::-webkit-media-controls-panel {
   line-height: 1.7;
 }
 
+.footer-links {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  align-items: center;
+}
+
+.footer-links a {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.footer-sep {
+  color: var(--border);
+  font-size: 12px;
+}
+
 /* ─── Empty / Error States ─── */
 .empty-state,
 .error-state {

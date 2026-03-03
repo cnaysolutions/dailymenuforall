@@ -398,6 +398,11 @@ export default async function Home({
 
         <footer className="page-footer">
           <p>{l.footer}</p>
+          <div className="footer-links">
+            <Link href="/privacy">{lang === "tr" ? "Gizlilik Politikası" : "Privacy Policy"}</Link>
+            <span className="footer-sep">·</span>
+            <Link href="/data-deletion">{lang === "tr" ? "Veri Silme" : "Data Deletion"}</Link>
+          </div>
         </footer>
 
         {/* Mobile: Past menus at bottom */}

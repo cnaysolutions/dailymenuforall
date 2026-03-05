@@ -4,6 +4,7 @@ import { createClient } from "@supabase/supabase-js";
 import { headers } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
+import CommentsSection from "./components/CommentsSection";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -388,6 +389,8 @@ export default async function Home({
           <DishCard label={l.salad} emoji="🥗" dish={menu?.salad} media={media?.salad} lang={lang} />
           <DishCard label={l.side} emoji="🍚" dish={menu?.side} media={media?.side} lang={lang} />
         </div>
+
+        <CommentsSection menuDate={menuDate} lang={lang} />
 
         <div className="music-player">
           <span className="music-icon">♪</span>

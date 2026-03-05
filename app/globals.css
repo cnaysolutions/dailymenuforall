@@ -2,20 +2,21 @@
 @import "tailwindcss";
 
 :root {
-  /* Warm, appetizing palette */
-  --bg: #faf7f2;
-  --bg-card: #ffffff;
+  /* Warm culinary palette on dark wood */
+  --bg: #3d2b1a;
+  --bg-card: rgba(255, 252, 247, 0.95);
   --text: #2c1810;
   --text-secondary: #6b5344;
   --text-muted: #9c8578;
+  --text-light: #f5ebe0;
   --accent: #c4501a;
   --accent-light: #fff0e8;
   --border: #e8ddd4;
   --border-light: #f0e8e0;
   --green: #2d6a4f;
   --green-light: #d8f3dc;
-  --shadow: 0 2px 20px rgba(44, 24, 16, 0.06);
-  --shadow-lg: 0 8px 40px rgba(44, 24, 16, 0.1);
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.3);
   --radius: 16px;
   --radius-sm: 10px;
 }
@@ -27,12 +28,42 @@
 }
 
 body {
-  background: var(--bg);
+  background-color: #2a1f17;
   background-image:
-    radial-gradient(ellipse at 20% 0%, rgba(196, 80, 26, 0.04) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 100%, rgba(45, 106, 79, 0.03) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(196, 80, 26, 0.02) 0%, transparent 70%),
-    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4b89c' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    /* Warm vignette overlay */
+    radial-gradient(ellipse at center, transparent 40%, rgba(20, 12, 8, 0.5) 100%),
+    /* Warm light glow from top */
+    radial-gradient(ellipse at 50% -20%, rgba(180, 120, 60, 0.15) 0%, transparent 60%),
+    /* Wood grain horizontal lines */
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 8px,
+      rgba(0, 0, 0, 0.03) 8px,
+      rgba(0, 0, 0, 0.03) 9px
+    ),
+    /* Wood grain variation */
+    repeating-linear-gradient(
+      2deg,
+      transparent,
+      transparent 30px,
+      rgba(60, 35, 15, 0.08) 30px,
+      rgba(60, 35, 15, 0.08) 31px
+    ),
+    /* Wood knots and scratches */
+    radial-gradient(ellipse at 15% 30%, rgba(80, 50, 25, 0.12) 0%, transparent 20%),
+    radial-gradient(ellipse at 75% 60%, rgba(80, 50, 25, 0.1) 0%, transparent 15%),
+    radial-gradient(ellipse at 40% 80%, rgba(80, 50, 25, 0.08) 0%, transparent 18%),
+    /* Base wood color gradient */
+    linear-gradient(
+      180deg,
+      #3d2b1a 0%,
+      #4a3422 20%,
+      #3d2b1a 40%,
+      #45311f 60%,
+      #3a2818 80%,
+      #332314 100%
+    );
   background-attachment: fixed;
   color: var(--text);
   font-family: 'DM Sans', -apple-system, sans-serif;
@@ -69,15 +100,15 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--text-muted);
+  color: rgba(245, 235, 224, 0.6);
   margin-bottom: 12px;
   padding-bottom: 8px;
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 1px solid rgba(245, 235, 224, 0.15);
 }
 
 .sidebar-empty {
   font-size: 13px;
-  color: var(--text-muted);
+  color: rgba(245, 235, 224, 0.4);
   font-style: italic;
 }
 
@@ -193,9 +224,10 @@ body {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: clamp(32px, 8vw, 48px);
   font-weight: 700;
-  color: var(--text);
+  color: var(--text-light);
   line-height: 1.15;
   letter-spacing: -0.02em;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 .header-sub {
@@ -214,7 +246,7 @@ body {
   flex-direction: column;
   gap: 2px;
   font-size: 14px;
-  color: var(--text-secondary);
+  color: rgba(245, 235, 224, 0.8);
 }
 
 .date-en {
@@ -256,7 +288,7 @@ body {
 }
 
 audio::-webkit-media-controls-panel {
-  background: var(--bg);
+  background: #faf7f2;
 }
 
 /* ─── Halal Badge ─── */
@@ -388,7 +420,7 @@ audio::-webkit-media-controls-panel {
   font-size: 11px;
   font-weight: 500;
   color: var(--text-secondary);
-  background: var(--bg);
+  background: #faf7f2;
   border: 1px solid var(--border);
   padding: 3px 10px;
   border-radius: 20px;
@@ -483,7 +515,7 @@ audio::-webkit-media-controls-panel {
   font-size: 14px;
   line-height: 1.6;
   color: var(--text-secondary);
-  background: var(--bg);
+  background: rgba(245, 240, 232, 0.5);
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-light);
 }
@@ -516,12 +548,12 @@ audio::-webkit-media-controls-panel {
   text-align: center;
   margin-top: 40px;
   padding-top: 24px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid rgba(245, 235, 224, 0.15);
 }
 
 .page-footer p {
   font-size: 12px;
-  color: var(--text-muted);
+  color: rgba(245, 235, 224, 0.5);
   line-height: 1.7;
 }
 
@@ -535,7 +567,7 @@ audio::-webkit-media-controls-panel {
 
 .footer-links a {
   font-size: 12px;
-  color: var(--text-muted);
+  color: rgba(245, 235, 224, 0.4);
   text-decoration: none;
 }
 
@@ -545,7 +577,7 @@ audio::-webkit-media-controls-panel {
 }
 
 .footer-sep {
-  color: var(--border);
+  color: rgba(245, 235, 224, 0.2);
   font-size: 12px;
 }
 
@@ -781,7 +813,7 @@ audio::-webkit-media-controls-panel {
   font-family: 'DM Sans', sans-serif;
   font-size: 14px;
   color: var(--text);
-  background: var(--bg);
+  background: #faf7f2;
   resize: vertical;
   min-height: 80px;
   line-height: 1.5;
@@ -843,7 +875,7 @@ audio::-webkit-media-controls-panel {
   padding: 6px 12px;
   border-radius: 20px;
   border: 1px solid var(--border);
-  background: var(--bg);
+  background: #faf7f2;
   transition: all 0.2s;
 }
 

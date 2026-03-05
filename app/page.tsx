@@ -11,9 +11,6 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
-const BG_MUSIC_URL =
-  "https://hwuhwqmixioehvshmila.supabase.co/storage/v1/object/public/menu-music/bg-tr-1.mp3";
-
 // ─── Language config per domain ───
 function getLangFromHost(host: string): "tr" | "en" {
   const h = host.toLowerCase();
@@ -391,13 +388,6 @@ export default async function Home({
         </div>
 
         <CommentsSection menuDate={menuDate} lang={lang} />
-
-        <div className="music-player">
-          <span className="music-icon">♪</span>
-          <audio controls loop preload="none" className="audio-el">
-            <source src={BG_MUSIC_URL} type="audio/mpeg" />
-          </audio>
-        </div>
 
         <footer className="page-footer">
           <p>{l.footer}</p>

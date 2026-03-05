@@ -340,7 +340,7 @@ export default async function Home({
 
   return (
     <div className="page-layout">
-      {/* Left Sidebar — Newer menus */}
+      {/* Left Sidebar — Newer menus + Comments */}
       <aside className="sidebar sidebar-left">
         <h3 className="sidebar-title">
           {lang === "tr" ? "Yeni" : "Newer"} ↑
@@ -357,6 +357,10 @@ export default async function Home({
         ) : (
           <p className="sidebar-empty">—</p>
         )}
+
+        <div className="sidebar-comments">
+          <CommentsSection menuDate={menuDate} lang={lang} />
+        </div>
       </aside>
 
       {/* Main Content */}
@@ -385,8 +389,6 @@ export default async function Home({
           <DishCard label={l.side} emoji="🍚" dish={menu?.side} media={media?.side} lang={lang} />
         </div>
 
-        <CommentsSection menuDate={menuDate} lang={lang} />
-
         <footer className="page-footer">
           <p>{l.footer}</p>
           <div className="footer-links">
@@ -395,6 +397,11 @@ export default async function Home({
             <Link href="/data-deletion">{lang === "tr" ? "Veri Silme" : "Data Deletion"}</Link>
           </div>
         </footer>
+
+        {/* Mobile: Comments */}
+        <div className="mobile-comments">
+          <CommentsSection menuDate={menuDate} lang={lang} />
+        </div>
 
         {/* Mobile: Past menus at bottom */}
         <div className="mobile-past-menus">

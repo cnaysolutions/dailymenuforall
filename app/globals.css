@@ -53,6 +53,10 @@ body {
   display: none; /* Hidden on mobile */
 }
 
+.sidebar-left {
+  width: 280px;
+}
+
 .sidebar-title {
   font-family: 'DM Sans', sans-serif;
   font-size: 11px;
@@ -610,6 +614,73 @@ audio::-webkit-media-controls-panel {
 }
 
 /* ═══════════════════════════════════════════════ */
+/* Sidebar Comments */
+.sidebar-comments {
+  margin-top: 24px;
+  border-top: 1px solid var(--border-light);
+  padding-top: 16px;
+}
+
+.sidebar-comments .comments-section {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.sidebar-comments .comments-title {
+  font-size: 18px;
+}
+
+.sidebar-comments .comments-subtitle {
+  font-size: 12px;
+}
+
+.sidebar-comments .comment-textarea {
+  min-height: 60px;
+  font-size: 13px;
+}
+
+.sidebar-comments .comment-form {
+  padding: 14px;
+}
+
+.sidebar-comments .comment-card {
+  padding: 12px;
+}
+
+.sidebar-comments .comment-card-text {
+  font-size: 13px;
+}
+
+.sidebar-comments .comments-feed {
+  max-height: 350px;
+}
+
+.sidebar-comments .google-login-btn {
+  font-size: 13px;
+  padding: 8px 18px;
+}
+
+.sidebar-comments .comment-login-prompt {
+  padding: 20px 14px;
+}
+
+.sidebar-comments .comment-login-prompt p {
+  font-size: 13px;
+}
+
+/* Mobile Comments */
+.mobile-comments {
+  display: block;
+  margin-top: 32px;
+}
+
+@media (min-width: 1024px) {
+  .mobile-comments {
+    display: none;
+  }
+}
+
 /* Comments Section                                */
 /* ═══════════════════════════════════════════════ */
 .comments-section {

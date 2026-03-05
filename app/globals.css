@@ -2,21 +2,21 @@
 @import "tailwindcss";
 
 :root {
-  /* Warm culinary palette on dark wood */
-  --bg: #3d2b1a;
-  --bg-card: rgba(255, 252, 247, 0.95);
+  /* Warm, appetizing palette */
+  --bg: #faf7f2;
+  --bg-card: rgba(255, 255, 255, 0.95);
   --text: #2c1810;
   --text-secondary: #6b5344;
   --text-muted: #9c8578;
-  --text-light: #f5ebe0;
+  --text-light: #2c1810;
   --accent: #c4501a;
   --accent-light: #fff0e8;
   --border: #e8ddd4;
   --border-light: #f0e8e0;
   --green: #2d6a4f;
   --green-light: #d8f3dc;
-  --shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
-  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.3);
+  --shadow: 0 2px 20px rgba(44, 24, 16, 0.06);
+  --shadow-lg: 0 8px 40px rgba(44, 24, 16, 0.1);
   --radius: 16px;
   --radius-sm: 10px;
 }
@@ -28,42 +28,29 @@
 }
 
 body {
-  background-color: #2a1f17;
+  background: #faf7f2;
   background-image:
-    /* Warm vignette overlay */
-    radial-gradient(ellipse at center, transparent 40%, rgba(20, 12, 8, 0.5) 100%),
-    /* Warm light glow from top */
-    radial-gradient(ellipse at 50% -20%, rgba(180, 120, 60, 0.15) 0%, transparent 60%),
-    /* Wood grain horizontal lines */
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 8px,
-      rgba(0, 0, 0, 0.03) 8px,
-      rgba(0, 0, 0, 0.03) 9px
-    ),
-    /* Wood grain variation */
-    repeating-linear-gradient(
-      2deg,
-      transparent,
-      transparent 30px,
-      rgba(60, 35, 15, 0.08) 30px,
-      rgba(60, 35, 15, 0.08) 31px
-    ),
-    /* Wood knots and scratches */
-    radial-gradient(ellipse at 15% 30%, rgba(80, 50, 25, 0.12) 0%, transparent 20%),
-    radial-gradient(ellipse at 75% 60%, rgba(80, 50, 25, 0.1) 0%, transparent 15%),
-    radial-gradient(ellipse at 40% 80%, rgba(80, 50, 25, 0.08) 0%, transparent 18%),
-    /* Base wood color gradient */
-    linear-gradient(
-      180deg,
-      #3d2b1a 0%,
-      #4a3422 20%,
-      #3d2b1a 40%,
-      #45311f 60%,
-      #3a2818 80%,
-      #332314 100%
-    );
+    /* Clean center fade */
+    radial-gradient(ellipse at center, #faf7f2 30%, transparent 70%),
+    /* Tomato red - top left */
+    radial-gradient(circle at 0% 0%, rgba(200, 50, 30, 0.25) 0%, transparent 25%),
+    /* Basil green - top right */
+    radial-gradient(circle at 100% 5%, rgba(60, 140, 50, 0.2) 0%, transparent 22%),
+    /* Lemon yellow - right edge */
+    radial-gradient(circle at 100% 45%, rgba(240, 200, 40, 0.18) 0%, transparent 20%),
+    /* Eggplant purple - bottom left */
+    radial-gradient(circle at 0% 90%, rgba(100, 40, 120, 0.15) 0%, transparent 22%),
+    /* Carrot orange - bottom right */
+    radial-gradient(circle at 95% 85%, rgba(230, 120, 30, 0.2) 0%, transparent 22%),
+    /* Avocado green - left edge */
+    radial-gradient(circle at 0% 50%, rgba(80, 130, 50, 0.15) 0%, transparent 18%),
+    /* Pepper red - right mid */
+    radial-gradient(circle at 100% 70%, rgba(190, 40, 30, 0.12) 0%, transparent 18%),
+    /* Herb green scatter */
+    radial-gradient(circle at 15% 20%, rgba(50, 120, 60, 0.1) 0%, transparent 12%),
+    radial-gradient(circle at 85% 30%, rgba(70, 150, 40, 0.08) 0%, transparent 10%),
+    /* Warm base */
+    linear-gradient(135deg, #fdf8f0 0%, #faf7f2 50%, #f8f3eb 100%);
   background-attachment: fixed;
   color: var(--text);
   font-family: 'DM Sans', -apple-system, sans-serif;
@@ -100,15 +87,15 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: rgba(245, 235, 224, 0.6);
+  color: var(--text-muted);
   margin-bottom: 12px;
   padding-bottom: 8px;
-  border-bottom: 1px solid rgba(245, 235, 224, 0.15);
+  border-bottom: 1px solid var(--border-light);
 }
 
 .sidebar-empty {
   font-size: 13px;
-  color: rgba(245, 235, 224, 0.4);
+  color: var(--text-muted);
   font-style: italic;
 }
 
@@ -224,10 +211,9 @@ body {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: clamp(32px, 8vw, 48px);
   font-weight: 700;
-  color: var(--text-light);
+  color: var(--text);
   line-height: 1.15;
   letter-spacing: -0.02em;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 .header-sub {
@@ -246,7 +232,7 @@ body {
   flex-direction: column;
   gap: 2px;
   font-size: 14px;
-  color: rgba(245, 235, 224, 0.8);
+  color: var(--text-secondary);
 }
 
 .date-en {
@@ -548,12 +534,12 @@ audio::-webkit-media-controls-panel {
   text-align: center;
   margin-top: 40px;
   padding-top: 24px;
-  border-top: 1px solid rgba(245, 235, 224, 0.15);
+  border-top: 1px solid var(--border);
 }
 
 .page-footer p {
   font-size: 12px;
-  color: rgba(245, 235, 224, 0.5);
+  color: var(--text-muted);
   line-height: 1.7;
 }
 
@@ -567,7 +553,7 @@ audio::-webkit-media-controls-panel {
 
 .footer-links a {
   font-size: 12px;
-  color: rgba(245, 235, 224, 0.4);
+  color: var(--text-muted);
   text-decoration: none;
 }
 
@@ -577,7 +563,7 @@ audio::-webkit-media-controls-panel {
 }
 
 .footer-sep {
-  color: rgba(245, 235, 224, 0.2);
+  color: var(--border);
   font-size: 12px;
 }
 

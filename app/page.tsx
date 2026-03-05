@@ -139,13 +139,11 @@ function DishCard({
 
       {images.length > 0 && (
         <div className="dish-image-wrap">
-          <Image
+          <img
             src={images[0]}
             alt={title}
-            width={800}
-            height={600}
             className="dish-image"
-            priority
+            loading="lazy"
           />
         </div>
       )}

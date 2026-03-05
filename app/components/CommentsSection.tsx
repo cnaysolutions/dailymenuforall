@@ -157,12 +157,12 @@ export default function CommentsSection({
     };
   }, [menuDate]);
 
-  // Auto-scroll effect for the sliding comments
+  // Auto-scroll effect — only when there are many comments
   useEffect(() => {
     const el = scrollRef.current;
-    if (!el || comments.length === 0) return;
+    if (!el || comments.length < 6) return;
     let scrollPos = 0;
-    const speed = 0.5;
+    const speed = 0.3;
     let animFrame: number;
     let paused = false;
 

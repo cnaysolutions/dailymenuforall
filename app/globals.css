@@ -653,7 +653,7 @@ audio::-webkit-media-controls-panel {
 }
 
 .sidebar-comments .comments-feed {
-  max-height: 350px;
+  max-height: 600px;
 }
 
 .sidebar-comments .google-login-btn {
@@ -906,7 +906,6 @@ audio::-webkit-media-controls-panel {
 }
 
 .comments-feed {
-  max-height: 420px;
   overflow-y: auto;
   scroll-behavior: smooth;
   padding-right: 4px;

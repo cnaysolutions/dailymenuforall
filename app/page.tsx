@@ -365,11 +365,6 @@ export default async function Home({
 
       {/* Main Content */}
       <main className="page-container">
-        {/* Tagline Banner */}
-        <div className="tagline-banner">
-          <p className="tagline-text">{l.tagline}</p>
-        </div>
-
         <header className="page-header">
           <div className="header-badge">
             {isToday ? l.badge_today : l.badge_latest}

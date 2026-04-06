@@ -27,6 +27,7 @@ export default async function RootLayout({
   return (
     <html lang={lang}>
       <head>
+        <meta name="tiktok-developers-site-verification" content="30v9cK2MIB3fbgf0R0H0pAbDLqT8PeJ3"/>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -34,7 +35,16 @@ export default async function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body>{children}</body>
+      <body>
+          <div className="tagline-banner">
+            <p className="tagline-text">
+              {lang === "tr"
+                ? "Her şeyi yapay zekâya soruyoruz — günlük menüyü neden sormayalım?"
+                : "We ask AI about everything — so why not the daily menu?"}
+            </p>
+          </div>
+          {children}
+      </body>
     </html>
   );
 }

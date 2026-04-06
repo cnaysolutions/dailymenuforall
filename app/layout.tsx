@@ -5,11 +5,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Günün Menüsü | Daily Menu",
   description:
-    "AI-powered daily halal menu — soup, main course, salad, and side. No pork, no alcohol. Yapay zeka ile oluşturulan günlük helal menü.",
-  keywords: ["daily menu", "halal food", "günün menüsü", "helal yemek", "AI menu"],
+    "AI-powered daily menu — soup, main course, salad, and side. Fresh recipes every day. Yapay zeka ile oluşturulan günlük menü.",
+  keywords: ["daily menu", "food recipes", "günün menüsü", "yemek tarifleri", "AI menu"],
   openGraph: {
     title: "Günün Menüsü | Daily Menu",
-    description: "Fresh halal menu every day — generated with AI",
+    description: "Fresh menu every day — generated with AI",
     type: "website",
   },
   robots: "index, follow",

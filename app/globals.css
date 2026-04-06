@@ -1052,3 +1052,18 @@ audio::-webkit-media-controls-panel {
   object-fit: cover;
   border: 1px solid var(--border-light);
 }
+.tagline-banner {
+  text-align: center;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #ff6b35, #f7c948);
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.tagline-text {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.02em;
+}

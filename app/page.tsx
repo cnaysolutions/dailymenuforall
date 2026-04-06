@@ -23,7 +23,6 @@ const labels = {
     badge_today: "Today's Menu",
     badge_latest: "Latest Menu",
     title: "Daily Menu",
-    halal: "✓ Halal — No pork, no alcohol",
     soup: "Soup",
     main: "Main Course",
     salad: "Salad",
@@ -33,6 +32,7 @@ const labels = {
     recipe: "How to Make",
     empty_title: "Daily Menu",
     empty_text: "Today's menu is being prepared. Check back soon!",
+    tagline: "We ask AI about everything — so why not the daily menu?",
     footer: "Menu generated with AI — ingredients may vary",
     error: "Something went wrong. Please try again later.",
     past_menus: "Past Menus",
@@ -42,7 +42,6 @@ const labels = {
     badge_today: "Günün Menüsü",
     badge_latest: "Son Menü",
     title: "Günün Menüsü",
-    halal: "✓ Helal — Domuz eti yok, alkol yok",
     soup: "Çorba",
     main: "Ana Yemek",
     salad: "Salata",
@@ -52,6 +51,7 @@ const labels = {
     recipe: "Nasıl Yapılır?",
     empty_title: "Günün Menüsü",
     empty_text: "Günün menüsü hazırlanıyor. Lütfen daha sonra tekrar kontrol edin!",
+    tagline: "Her şeyi yapay zekâya soruyoruz — günlük menüyü neden sormayalım?",
     footer: "Menü yapay zeka ile oluşturulmuştur — malzemeler değişebilir",
     error: "Bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
     past_menus: "Geçmiş Menüler",
@@ -365,6 +365,11 @@ export default async function Home({
 
       {/* Main Content */}
       <main className="page-container">
+        {/* Tagline Banner */}
+        <div className="tagline-banner">
+          <p className="tagline-text">{l.tagline}</p>
+        </div>
+
         <header className="page-header">
           <div className="header-badge">
             {isToday ? l.badge_today : l.badge_latest}
@@ -379,8 +384,6 @@ export default async function Home({
             </Link>
           )}
         </header>
-
-        <div className="halal-badge">{l.halal}</div>
 
         <div className="dishes-grid">
           <DishCard label={l.soup} emoji="🍜" dish={menu?.soup} media={media?.soup} lang={lang} />
